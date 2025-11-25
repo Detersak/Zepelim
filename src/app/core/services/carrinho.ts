@@ -10,12 +10,12 @@ export class CarrinhoService {
   private itensSubject = new BehaviorSubject<ItemCarrinho[]>([]);
   itens$ = this.itensSubject.asObservable();
 
-  // Estado derivado: Calcula o TOTAL automaticamente
+  // Estado derivado: Calcula o total automaticamente
   total$ = this.itens$.pipe(
     map(itens => itens.reduce((acc, item) => acc + item.subtotal, 0))
   );
 
-  // Estado derivado: Calcula a QUANTIDADE de itens
+  // Estado derivado: Calcula a qtd de itens
   quantidadeItens$ = this.itens$.pipe(
     map(itens => itens.length)
   );

@@ -7,7 +7,6 @@ import { Produto } from './models/produto.model';
 })
 export class ProdutosService {
 
-  // MOCK DATA: Simula o Banco de Dados
   private produtos: Produto[] = [
     // --- BURGERS ---
     {
@@ -108,7 +107,6 @@ export class ProdutosService {
 
   /**
    * Simula a edição de status pelo Gerente (Pausar/Ativar item)
-   * ATENÇÃO: Como não há Backend, isso reseta ao recarregar a página.
    */
   toggleDisponibilidade(id: number): void {
     const index = this.produtos.findIndex(p => p.id === id);
