@@ -9,22 +9,7 @@ import { Observable } from 'rxjs';
   standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl:'./header.html',
-  styles: [`
-    /* Estilo do Link Ativo (Vermelho do Zepelim) */
-    .active-link {
-      color: #dc3545 !important;
-      border-bottom: 2px solid #dc3545;
-    }
-
-    /* Espaçamento extra entre os links no Desktop */
-    .spacing-links .nav-item {
-      margin-left: 15px;
-      margin-right: 15px;
-    }
-    
-    .nav-link { transition: color 0.3s; }
-    .nav-link:hover { color: #dc3545 !important; }
-  `]
+  styleUrl:'./header.css'
 })
 export class HeaderComponent {
   total$: Observable<number>;

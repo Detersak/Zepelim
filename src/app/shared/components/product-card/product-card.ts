@@ -7,10 +7,7 @@ import { Produto } from '../../../core/services/models/produto.model';
   standalone: true,
   imports: [CommonModule],
   templateUrl:'product-card.html',
-  styles: [`
-    .grayscale { filter: grayscale(100%); opacity: 0.6; }
-    .card:hover { transform: translateY(-5px); transition: 0.3s; }
-  `]
+  styleUrl:'./product-card.css'
 })
 export class ProductCardComponent {
   @Input({ required: true }) produto!: Produto;

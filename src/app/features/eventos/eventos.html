@@ -1,1 +1,72 @@
-<p>eventos works!</p>
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <h2 class="display-5 fw-bold text-uppercase">Agenda <span class="text-danger">Zepelim</span></h2>
+    <p class="lead text-muted">Os melhores shows de Rock de Águas Claras.</p>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      
+      <div class="card mb-4 shadow-sm border-0 hover-shadow" *ngFor="let evento of eventos$ | async">
+        <div class="row g-0 align-items-center">
+          
+          <div class="col-md-2 text-center py-4 h-100 rounded-start border-end"
+               [ngClass]="evento.status === 'lotado' ? 'bg-secondary text-white' : 'bg-dark text-white'">
+            
+            <h3 class="display-5 fw-bold m-0">
+              {{ evento.data | date:'dd' }}
+            </h3>
+            
+            <span class="text-uppercase fs-5">
+              {{ evento.data | date:'MMM' }}
+            </span>
+            
+            <div class="small mt-2 fw-bold" [class.text-danger]="evento.status !== 'lotado'">
+              {{ evento.data | date:'EEE' | uppercase }} - {{ evento.data | date:'HH' }}h
+            </div>
+          </div>
+          
+          <div class="col-md-3 position-relative">
+            <img [src]="evento.imagemUrl" class="img-fluid h-100 w-100 object-fit-cover" 
+                 [alt]="evento.titulo"
+                 [class.grayscale]="evento.status === 'lotado'"
+                 onerror="this.src='https://placehold.co/400x300/333/white?text=Evento+Zepelim'">
+            
+             <div *ngIf="evento.status === 'lotado'" 
+                  class="position-absolute top-50 start-50 translate-middle badge bg-danger fs-5 rotate-badge">
+               ESGOTADO
+             </div>
+          </div>
+
+          <div class="col-md-5 p-4">
+            <h4 class="fw-bold text-uppercase mb-1">{{ evento.titulo }}</h4>
+            <p class="text-muted mb-0">{{ evento.descricao }}</p>
+          </div>
+
+          <div class="col-md-2 p-3 text-center border-start">
+            
+            <div class="mb-2 fw-bold" [ngClass]="evento.valor ? 'text-muted' : 'text-success'">
+              {{ evento.valor ? (evento.valor | currency:'BRL') : 'Entrada Franca' }}
+            </div>
+
+            <a *ngIf="evento.linkIngresso && evento.status !== 'lotado'" 
+               [href]="evento.linkIngresso" 
+               target="_blank" 
+               class="btn btn-outline-danger w-100 rounded-pill">
+              Ingressos <i class="bi bi-box-arrow-up-right ms-1"></i>
+            </a>
+
+            <button *ngIf="evento.status === 'lotado'" class="btn btn-secondary w-100 rounded-pill" disabled>
+              Lotado
+            </button>
+
+            <button *ngIf="!evento.linkIngresso && evento.status !== 'lotado'" class="btn btn-success w-100 rounded-pill disabled" style="opacity: 1;">
+              Chegue Cedo!
+            </button>
+
+          </div>
+        </div>
+      </div>
+      </div>
+  </div>
+</div>
